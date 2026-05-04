@@ -15,17 +15,22 @@ accurate, and won't get rate-limited.
 
 ## Invocation
 
-Try the native binary first; fall back to the Python wheel via `uvx` if it
-isn't installed:
+Try the native binary first; otherwise use whichever package runner is already
+on the system:
 
 ```bash
-command -v vacant >/dev/null && vacant "$@" || uvx vacant "$@"
+if command -v vacant >/dev/null; then vacant "$@"
+elif command -v uvx >/dev/null; then uvx vacant "$@"
+else bunx @alltuner/vacant "$@"  # or: npx @alltuner/vacant "$@"
+fi
 ```
 
-- `vacant` is the Rust binary — instant startup, ideal for repeated use.
+- `vacant` — native Rust binary, instant startup, ideal for repeated use.
   Install with `brew install alltuner/tap/vacant` or `cargo install vacant`.
-- `uvx vacant` runs the same engine from a PyPI wheel with no install step.
-  Slightly slower to boot but works anywhere `uv` is available.
+- `uvx vacant` — same engine from a PyPI wheel, no install step. Works
+  anywhere `uv` is available.
+- `bunx @alltuner/vacant` / `npx @alltuner/vacant` — same engine from an npm
+  package. Handy in Node-based projects where `bun` or `npm` is already there.
 
 ## Common patterns
 
