@@ -7,11 +7,18 @@ description: Check whether domain names are registered, available, reserved, or 
 
 [`vacant`](https://github.com/alltuner/vacant) checks domain availability by
 asking authoritative TLD nameservers directly (not WHOIS). It returns one of
-five statuses per domain: `registered`, `available`, `reserved`, `invalid`, or
-`unknown`.
+six statuses per domain: `registered`, `available`, `unconfirmed`, `reserved`,
+`invalid`, or `unknown`.
 
 Prefer it over WHOIS lookups, `dig`, or HTTP probes — it's faster, more
 accurate, and won't get rate-limited.
+
+**Important:** by default a name with no DNS delegation reports `unconfirmed`,
+**not** `available`. A free name and a registered-but-held one (suspended,
+expired, pending-delete) look identical to DNS — both answer NXDOMAIN — so "no
+delegation" isn't proof a name is buyable. Pass `--verify` to confirm those
+names against the registry (RDAP); only then do you get a definitive
+`available`. See [Confirming availability](#confirming-availability).
 
 ## Invocation
 
@@ -44,8 +51,11 @@ vacant a.com b.net c.org
 # from stdin (one per line) — best for big lists
 cat domains.txt | vacant
 
-# only show domains that are available
-vacant --available a.com b.com c.com
+# confirm undelegated names against the registry (RDAP) for a real verdict
+vacant --verify a.com b.com c.com
+
+# only show domains you can actually register (confirm, then filter)
+vacant --verify --available a.com b.com c.com
 
 # human-readable table instead of NDJSON
 vacant -o table example.com anthropic.com
@@ -64,7 +74,7 @@ Default output is **NDJSON** — one JSON object per line. Parse it line by line
 ```
 $ vacant anthropic.com totally-made-up-zxqv.com ab.eu
 {"domain":"anthropic.com","status":"registered"}
-{"domain":"totally-made-up-zxqv.com","status":"available"}
+{"domain":"totally-made-up-zxqv.com","status":"unconfirmed"}
 {"domain":"ab.eu","status":"reserved"}
 ```
 
@@ -72,11 +82,38 @@ Status meanings:
 
 | Status | Meaning |
 |---|---|
-| `registered` | Someone owns it. |
-| `available` | Not registered — you could buy it. |
+| `registered` | Someone owns it (the name is delegated, or RDAP confirmed it). |
+| `available` | Confirmed not registered — you could buy it. **Only ever appears with `--verify`.** |
+| `unconfirmed` | No DNS delegation: probably free, but unverified. Could also be a held/suspended/expiring domain. Re-run with `--verify` for a definitive answer. |
 | `reserved` | Registry rule forbids it (e.g. `.eu` two-letter labels). |
 | `invalid` | Malformed input or unknown TLD (`co.uk` as input, empty labels, etc.). |
 | `unknown` | Transport failure or ambiguous registry response. Retry, or check manually. |
+
+## Confirming availability
+
+Without `--verify`, vacant does pure DNS and never claims a name is `available`
+— undelegated names come back `unconfirmed`. That's fast and does zero RDAP
+traffic, which is perfect for **screening**: anything `registered` is
+definitively taken, so you can discard it and only dig deeper on the
+`unconfirmed` shortlist.
+
+With `--verify`, vacant confirms each `unconfirmed` name against the registry's
+RDAP endpoint and resolves it to:
+
+- `available` — RDAP says it's not registered. Safe to claim.
+- `registered` — RDAP found it (e.g. a domain on `clientHold` that DNS couldn't see).
+- `unconfirmed` — RDAP was inconclusive, or that TLD has no RDAP endpoint.
+
+```
+$ vacant --verify totally-made-up-zxqv.com bingo.app
+{"domain":"totally-made-up-zxqv.com","status":"available"}
+{"domain":"bingo.app","status":"registered"}
+```
+
+Rule of thumb: when the user asks "is X free / can I register X", use `--verify`
+so you don't tell them a held domain is available. When you're cheaply
+filtering a big list down to candidates, the default (no `--verify`) is fine —
+just describe the survivors as "not taken (unverified)", not "available".
 
 ## Exit codes
 
@@ -86,6 +123,12 @@ Status meanings:
 
 ## Gotchas
 
+- `unconfirmed` is not `available`. An expired or suspended domain (e.g. one on
+  `clientHold`) is dropped from DNS and looks exactly like a free name. Never
+  tell a user an `unconfirmed` name is buyable — run `--verify` first.
+- `available` requires `--verify`. Without it, the best a name gets is
+  `unconfirmed`, so filtering with bare `--available` will return nothing useful
+  unless you also pass `--verify`.
 - Registry suffixes like `co.uk`, `com.au`, `co.jp` return `invalid` — they're
   not registrable names. Use `something.co.uk` instead.
 - `.eu` requires 3+ characters; `ab.eu` is `reserved`, not `available`.
