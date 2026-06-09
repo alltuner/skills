@@ -33,7 +33,7 @@ npx skills add alltuner/skills --skill vacant
 
 | Skill | Description |
 |---|---|
-| [`vacant`](skills/vacant/SKILL.md) | Check whether domain names are registered, available, reserved, or invalid. Wraps [`vacant`](https://github.com/alltuner/vacant). |
+| [`vacant`](skills/vacant/SKILL.md) | Check whether domain names are registered, available, reserved, or invalid. Wraps [`vacant`](https://github.com/alltuner/vacant) — also usable in the browser at [vacant.alltuner.com](https://vacant.alltuner.com). |
 
 ## License
 
