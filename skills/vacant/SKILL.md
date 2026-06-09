@@ -39,6 +39,19 @@ fi
 - `bunx @alltuner/vacant` / `npx @alltuner/vacant` — same engine from an npm
   package. Handy in Node-based projects where `bun` or `npm` is already there.
 
+## MCP server
+
+If your host speaks the Model Context Protocol, run vacant as an MCP server
+instead of shelling out:
+
+```bash
+uvx --from 'vacant[mcp]' vacant mcp
+```
+
+It exposes one tool — `check_domains(domains, verify=false)` — returning a
+`{domain, status}` per input, with the same verdicts and `--verify` semantics
+as the CLI.
+
 ## Common patterns
 
 ```bash
