@@ -1,0 +1,13 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "Naming & Domains",
+      "description": "Skills for finding and checking project, product, and domain names.",
+      "skills": [
+        "vacant"
+      ]
+    }
+  ]
+}
