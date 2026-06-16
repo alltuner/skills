@@ -34,6 +34,7 @@ npx skills add alltuner/skills --skill vacant
 | Skill | Description |
 |---|---|
 | [`vacant`](skills/vacant/SKILL.md) | Check whether domain names are registered, available, reserved, or invalid. Wraps [`vacant`](https://github.com/alltuner/vacant) — also usable in the browser at [vacant.alltuner.com](https://vacant.alltuner.com). |
+| [`selfmail`](skills/selfmail/SKILL.md) | Email yourself from the shell or an AI agent, over Resend. Wraps the [`selfmail`](https://github.com/alltuner/selfmail) CLI (and MCP server). |
 
 ## License
 

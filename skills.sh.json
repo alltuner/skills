@@ -8,6 +8,13 @@
       "skills": [
         "vacant"
       ]
+    },
+    {
+      "title": "Notifications",
+      "description": "A simple way to send yourself an email — handy for agents reporting results, cron jobs, and CI.",
+      "skills": [
+        "selfmail"
+      ]
     }
   ]
 }
