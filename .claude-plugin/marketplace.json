@@ -1,6 +1,8 @@
 {
   "name": "alltuner",
-  "owner": { "name": "David Poblador i Garcia" },
+  "owner": {
+    "name": "David Poblador i Garcia"
+  },
   "plugins": [
     {
       "name": "vacant",
@@ -14,22 +16,42 @@
     },
     {
       "name": "fastapi",
-      "source": { "source": "git-subdir", "url": "https://github.com/fastapi/fastapi", "path": "fastapi/.agents/skills/fastapi", "sha": "afe41126f624af30038cc8e17b2aaf60ebd4b838" },
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/fastapi/fastapi",
+        "path": "fastapi/.agents/skills/fastapi",
+        "sha": "afe41126f624af30038cc8e17b2aaf60ebd4b838"
+      },
       "description": "FastAPI best practices and conventions"
     },
     {
       "name": "shadcn",
-      "source": { "source": "git-subdir", "url": "https://github.com/shadcn/ui", "path": "skills/shadcn", "sha": "d28738b183c5eaa69d8d540826e450f30d39ab6c" },
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/shadcn/ui",
+        "path": "skills/shadcn",
+        "sha": "d28738b183c5eaa69d8d540826e450f30d39ab6c"
+      },
       "description": "shadcn/ui component management"
     },
     {
       "name": "remotion-best-practices",
-      "source": { "source": "git-subdir", "url": "https://github.com/remotion-dev/skills", "path": "skills/remotion", "sha": "62d0a68043d5adb5ff6baa1e38328855172c9d92" },
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/remotion-dev/skills",
+        "path": "skills/remotion-best-practices",
+        "sha": "62d0a68043d5adb5ff6baa1e38328855172c9d92"
+      },
       "description": "Best practices for Remotion video creation in React"
     },
     {
       "name": "find-skills",
-      "source": { "source": "git-subdir", "url": "https://github.com/vercel-labs/skills", "path": "skills/find-skills", "sha": "777599e1159e401b11ce4c8a57c20f09a8f1596e" },
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/vercel-labs/skills",
+        "path": "skills/find-skills",
+        "sha": "777599e1159e401b11ce4c8a57c20f09a8f1596e"
+      },
       "description": "Discover and install agent skills"
     }
   ]
