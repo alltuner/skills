@@ -3,6 +3,7 @@
   "owner": {
     "name": "David Poblador i Garcia"
   },
+  "description": "Agent skills by alltuner: domain availability checks and self-addressed email.",
   "plugins": [
     {
       "name": "vacant",
