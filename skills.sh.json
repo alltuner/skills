@@ -3,6 +3,13 @@
   "notGrouped": "bottom",
   "groupings": [
     {
+      "title": "Version Control",
+      "description": "Skills for working with git repositories and worktrees.",
+      "skills": [
+        "git-sprout"
+      ]
+    },
+    {
       "title": "Naming & Domains",
       "description": "Skills for finding and checking project, product, and domain names.",
       "skills": [
