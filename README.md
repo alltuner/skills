@@ -26,13 +26,14 @@
 npx skills add alltuner/skills
 
 # just one
-npx skills add alltuner/skills --skill vacant
+npx skills add alltuner/skills --skill git-sprout
 ```
 
 ## Skills
 
 | Skill | Description |
 |---|---|
+| [`git-sprout`](skills/git-sprout/SKILL.md) | Create git worktrees that share disk blocks instead of copying the tree. Wraps [`git-sprout`](https://sprout.alltuner.com). |
 | [`vacant`](skills/vacant/SKILL.md) | Check whether domain names are registered, available, reserved, or invalid. Wraps [`vacant`](https://github.com/alltuner/vacant) — also usable in the browser at [vacant.alltuner.com](https://vacant.alltuner.com). |
 | [`selfmail`](skills/selfmail/SKILL.md) | Email yourself from the shell or an AI agent, over Resend. Wraps the [`selfmail`](https://github.com/alltuner/selfmail) CLI (and MCP server). |
 

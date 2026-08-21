@@ -3,8 +3,13 @@
   "owner": {
     "name": "David Poblador i Garcia"
   },
-  "description": "Agent skills by alltuner: domain availability checks and self-addressed email.",
+  "description": "Agent skills by alltuner: space-free git worktrees, domain availability checks and self-addressed email.",
   "plugins": [
+    {
+      "name": "git-sprout",
+      "source": "./skills/git-sprout",
+      "description": "Git worktrees that share disk blocks instead of copying the tree"
+    },
     {
       "name": "vacant",
       "source": "./skills/vacant",
